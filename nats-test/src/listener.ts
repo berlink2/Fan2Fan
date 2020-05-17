@@ -8,16 +8,5 @@ const stan = nats.connect("ticketing", randomBytes(4).toString("hex"), {
   url: "http://localhost:4222",
 });
 
-stan.on("connect", () => {
-  console.log("Listener connected to Nats");
-
-  stan.on("close", () => {
-    console.log("Nats connection closed.");
-    process.exit();
-  });
-
-  new TicketCreatedListener(stan).listen();
-});
-
 process.on("SIGINT", () => stan.close());
 process.on("SIGTERM", () => stan.close());
