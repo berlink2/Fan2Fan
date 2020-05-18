@@ -6,8 +6,9 @@ import {
   requireAuth,
   NotAuthorizedError,
   NotFoundError,
+  BadRequestError,
 } from "@fan2fan/common";
-import { TickerUpdatedPublisher } from "../events/publishers/ticket-updated-publisher";
+import { TicketUpdatedPublisher } from "../events/publishers/ticket-updated-publisher";
 import { natsWrapper } from "../nats-wrapper";
 
 /**
@@ -33,6 +34,10 @@ router.put(
       throw new NotFoundError();
     }
 
+    if (ticket.orderId) {
+      throw new BadRequestError("This ticket is reserved by another customer");
+    }
+
     //checks if ticket belongs to user
     if (ticket.userId !== req.currentUser!.id) {
       throw new NotAuthorizedError();
@@ -41,7 +46,7 @@ router.put(
     ticket.set({ title: req.body.title, price: req.body.price });
     await ticket.save();
 
-    new TickerUpdatedPublisher(natsWrapper.client).publish({
+    new TicketUpdatedPublisher(natsWrapper.client).publish({
       id: ticket.id,
       version: ticket.version,
       title: ticket.title,
