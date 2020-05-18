@@ -1,12 +1,9 @@
 import mongoose from "mongoose";
 import { app } from "./app";
 import { natsWrapper } from "./nats-wrapper";
-import { TicketCreatedListener } from "./events/listeners/ticket-created-listener";
-import { TicketUpdatedListener } from "./events/listeners/ticket-updated-listener";
-import { ExpirationCompletedListener } from "./events/listeners/expiration-completed-listener";
 
 const start = async () => {
-  //checks for environmenta variables
+  //declare environment variables
   if (!process.env.JWT_KEY) {
     throw new Error("Please define JWT_KEY");
   }
@@ -23,8 +20,8 @@ const start = async () => {
     throw new Error("Please define NATS_CLUSTER_ID for this service");
   }
 
-  //connects to Nats streaming server
   try {
+    //connect to nats server
     await natsWrapper.connect(
       process.env.NATS_CLUSTER_ID,
       process.env.NATS_CLIENT_ID,
@@ -38,11 +35,7 @@ const start = async () => {
     process.on("SIGINT", () => natsWrapper.client.close());
     process.on("SIGTERM", () => natsWrapper.client.close());
 
-    new TicketCreatedListener(natsWrapper.client).listen();
-    new TicketUpdatedListener(natsWrapper.client).listen();
-    new ExpirationCompletedListener(natsWrapper.client).listen();
-
-    //connect to mongoDB
+    //connect to mongodb
     await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
