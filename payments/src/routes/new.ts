@@ -9,6 +9,10 @@ import {
   OrderStatus,
 } from "@fan2fan/common";
 import { Order } from "../models/order";
+import { stripe } from "../stripe";
+import { Payment } from "../models/payment";
+import { PaymentCreatedPublisher } from "../events/publishers/payment-created-publisher";
+import { natsWrapper } from "../nats-wrapper";
 
 const router = express.Router();
 
@@ -31,7 +35,25 @@ router.post(
       throw new BadRequestError("Order was cancelled");
     }
 
-    res.send({ success: true });
+    const stripeCharge = await stripe.charges.create({
+      currency: "usd",
+      amount: order.price * 100,
+      source: token,
+    });
+
+    const payment = Payment.build({
+      orderId: orderId,
+      stripeId: stripeCharge.id,
+    });
+
+    await payment.save();
+    new PaymentCreatedPublisher(natsWrapper.client).publish({
+      orderId: payment.orderId,
+      stripeId: payment.stripeId,
+      id: payment.id,
+    });
+
+    res.status(201).send({ paymentId: payment.id });
   }
 );
 
