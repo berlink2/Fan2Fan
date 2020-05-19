@@ -49,10 +49,12 @@ const orderSchema = new mongoose.Schema(
 
 orderSchema.set("versionKey", "version");
 orderSchema.plugin(updateIfCurrentPlugin);
+
 orderSchema.statics.build = (attrs: OrderAttrs) => {
   return new Order({
     _id: attrs.id,
     version: attrs.version,
+    userId: attrs.userId,
     price: attrs.price,
     status: attrs.status,
   });
