@@ -14,6 +14,16 @@ export default ({ currentUser }) => {
       btnClassName: "nav-link btn btn-primary",
     },
     currentUser && {
+      label: "Sell Tickets",
+      href: "/tickets/new",
+      btnClassName: "nav-link btn btn-success",
+    },
+    currentUser && {
+      label: "My Orders",
+      href: "/orders",
+      btnClassName: "nav-link btn btn-primary",
+    },
+    currentUser && {
       label: "Sign out",
       href: "/auth/signout",
       btnClassName: "nav-link btn btn-primary",

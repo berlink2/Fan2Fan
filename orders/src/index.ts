@@ -42,6 +42,7 @@ const start = async () => {
     new TicketUpdatedListener(natsWrapper.client).listen();
     new ExpirationCompletedListener(natsWrapper.client).listen();
     new PaymentCreatedListener(natsWrapper.client).listen();
+    
     //connect to mongoDB
     await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
