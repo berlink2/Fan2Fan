@@ -100,13 +100,15 @@ export default () => {
             {showPassword ? "🙈" : "🐵"}
           </span>
         </div>
-        Password strength:<span ref={passwordRef}> {pwStrength}</span>
-        <ul>
+        <p>
+          Password strength:<span ref={passwordRef}> {pwStrength}</span>
+        </p>
+        {/* <ul>
           <li>must be at least 8 characters</li>
           <li>must contain a capital letter</li>
           <li>must contain a number</li>
           <li>must contain a special character</li>
-        </ul>
+        </ul> */}
         {errors}
         <button className="btn btn-primary">Sign up</button>
       </form>

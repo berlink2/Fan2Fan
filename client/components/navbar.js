@@ -32,7 +32,7 @@ export default ({ currentUser }) => {
     .filter((linkConfig) => linkConfig)
     .map(({ label, href, btnClassName }) => {
       return (
-        <li className="nav-item mx-1" key={href}>
+        <li className="nav-item mx-2" key={href}>
           <Link href={href}>
             <a className={btnClassName}>{label}</a>
           </Link>
@@ -40,13 +40,15 @@ export default ({ currentUser }) => {
       );
     });
   return (
-    <nav className="navbar navbar-light bg-light">
-      <Link href="/">
-        <a className="navbar-brand">Fan2Fan</a>
-      </Link>
-      <div className="d-flex justify-content-end">
-        <ul className="nav d-flex align-items-center">{links}</ul>
-      </div>
-    </nav>
+    <div className="container">
+      <nav className="navbar fixed-top navbar-dark bg-transparent">
+        <Link href="/">
+          <a className="navbar-brand mx-5">Fan2Fan</a>
+        </Link>
+        <div className="d-flex justify-content-end">
+          <ul className="nav d-flex align-items-center mx-5">{links}</ul>
+        </div>
+      </nav>
+    </div>
   );
 };

@@ -1,18 +1,13 @@
 import "bootstrap/dist/css/bootstrap.css";
 import buildClient from "../api/build-client";
 import Navbar from "../components/navbar";
-<script
-  src="https://kit.fontawesome.com/6b38a7ee17.js"
-  crossorigin="anonymous"
-></script>;
 const AppComponent = ({ Component, pageProps, currentUser }) => {
   return (
-    <div>
+    <>
       <Navbar currentUser={currentUser} />
-      <div className="container">
-        <Component currentUser={currentUser} {...pageProps} />
-      </div>
-    </div>
+
+      <Component currentUser={currentUser} {...pageProps} />
+    </>
   );
 };
 
