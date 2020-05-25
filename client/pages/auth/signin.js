@@ -1,9 +1,11 @@
 import { useState } from "react";
 import Router from "next/router";
 import useRequest from "../../hooks/use-request";
+import styles from "../../components/style/signin.module.css";
 export default () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const { doRequest, errors } = useRequest({
     url: "/api/users/signin",
@@ -24,36 +26,77 @@ export default () => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <div className="container-fluid my-5">
       <h1>Sign in</h1>
-      <div className="form-group">
-        <label>Email</label>
-        <input
-          value={email}
-          type="email"
-          placeholder="Enter email address"
-          onChange={(e) => {
-            setEmail(e.currentTarget.value);
-          }}
-          className="form-control"
-        />
-      </div>
-      <div className="form-group">
-        <label>Password</label>
-        <input
-          type="password"
-          value={password}
-          placeholder="Enter Password"
-          onChange={(e) => {
-            setPassword(e.currentTarget.value);
-          }}
-          className="form-control"
-        />
-      </div>
+      <form className={styles.form} onSubmit={onSubmit}>
+        <div className={styles.field}>
+          <input
+            type="email"
+            name="email"
+            className={styles.input}
+            onChange={(e) => setEmail(e.currentTarget.value)}
+            placeholder=""
+          />
+          <label htmlFor="email" className={styles.label}>
+            Email
+          </label>
+        </div>
+        <div className={styles.field}>
+          <input
+            type={showPassword ? "text" : "password"}
+            name="password"
+            className={styles.input}
+            onChange={(e) => setPassword(e.currentTarget.value)}
+            placeholder=""
+          />
+          <label htmlFor="password" className={styles.label}>
+            Password
+          </label>
+          <span
+            className={styles.togglePW}
+            onClick={() => {
+              setShowPassword(!showPassword);
+              console.log(showPassword);
+            }}
+          >
+            {showPassword ? "🙈" : "🐵"}
+          </span>
+        </div>
+        {errors}
+        <button className="btn btn-primary">Sign in</button>
+      </form>
+    </div>
 
-      {errors}
+    // <form onSubmit={onSubmit}>
+    //   <h1>Sign in</h1>
+    //   <div className="form-group">
+    //     <label>Email</label>
+    //     <input
+    //       value={email}
+    //       type="email"
+    //       placeholder="Enter email address"
+    //       onChange={(e) => {
+    //         setEmail(e.currentTarget.value);
+    //       }}
+    //       className="form-control"
+    //     />
+    //   </div>
+    //   <div className="form-group">
+    //     <label>Password</label>
+    //     <input
+    //       type="password"
+    //       value={password}
+    //       placeholder="Enter Password"
+    //       onChange={(e) => {
+    //         setPassword(e.currentTarget.value);
+    //       }}
+    //       className="form-control"
+    //     />
+    //   </div>
 
-      <button className="btn btn-primary">Sign in</button>
-    </form>
+    //   {errors}
+
+    //   <button className="btn btn-primary">Sign in</button>
+    // </form>
   );
 };

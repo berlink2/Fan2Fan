@@ -1,0 +1,76 @@
+.form {
+  --text-color: rgb(0, 0, 0);
+  max-width: 500px;
+}
+
+.field {
+  width: 100%;
+  position: relative;
+  border-bottom: 2px dashed var(--text-color);
+  margin: 4rem auto 1rem;
+}
+
+.label {
+  color: black;
+  font-size: 1.2rem;
+}
+
+.input {
+  outline: none;
+  border: none;
+  overflow: hidden;
+  margin: 0;
+  width: 100%;
+  padding: 0.25rem 0;
+  background: none;
+  color: black;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.input:invalid {
+  color: red;
+}
+
+.field::after {
+  content: "";
+  position: relative;
+  display: block;
+  height: 4px;
+  width: 100%;
+  background: yellowgreen;
+  transform: scaleX(0);
+  transform-origin: 0%;
+  transition: transform 500ms ease;
+  top: 2px;
+}
+
+.field:focus-within {
+  border-color: transparent;
+}
+
+.field:focus-within::after {
+  transform: scaleX(1);
+}
+
+.label {
+  left: 0%;
+  padding-top: 30px;
+  z-index: -1;
+  position: absolute;
+  transform: translateY(-2rem);
+  transform-origin: 0%;
+  transition: transform 400ms;
+}
+
+.field:focus-within .label,
+.input:not(:placeholder-shown) + .label {
+  transform: scale(0.8) translateY(-4rem);
+}
+
+.togglePW {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  font-size: 0.8 rem;
+}
