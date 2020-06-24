@@ -20,7 +20,6 @@ const LandingPage = ({ currentUser, tickets }) => {
       "url(" + "https://source.unsplash.com/Qq2h76kYRFI/1600x900" + ")",
     height: "100vh",
     width: "100%",
-
     backgroundSize: "cover",
   };
 
