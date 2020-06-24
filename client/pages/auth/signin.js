@@ -36,6 +36,7 @@ export default () => {
             className={styles.input}
             onChange={(e) => setEmail(e.currentTarget.value)}
             placeholder=""
+            autoComplete="off"
           />
           <label htmlFor="email" className={styles.label}>
             Email
@@ -66,37 +67,5 @@ export default () => {
         <button className="btn btn-primary">Sign in</button>
       </form>
     </div>
-
-    // <form onSubmit={onSubmit}>
-    //   <h1>Sign in</h1>
-    //   <div className="form-group">
-    //     <label>Email</label>
-    //     <input
-    //       value={email}
-    //       type="email"
-    //       placeholder="Enter email address"
-    //       onChange={(e) => {
-    //         setEmail(e.currentTarget.value);
-    //       }}
-    //       className="form-control"
-    //     />
-    //   </div>
-    //   <div className="form-group">
-    //     <label>Password</label>
-    //     <input
-    //       type="password"
-    //       value={password}
-    //       placeholder="Enter Password"
-    //       onChange={(e) => {
-    //         setPassword(e.currentTarget.value);
-    //       }}
-    //       className="form-control"
-    //     />
-    //   </div>
-
-    //   {errors}
-
-    //   <button className="btn btn-primary">Sign in</button>
-    // </form>
   );
 };

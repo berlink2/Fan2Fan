@@ -1,5 +1,6 @@
 .jumbotronFluid {
-  height: 10vh;
+  background-image: url("https://source.unsplash.com/Qq2h76kYRFI/1600x900");
+  height: 65vh;
   min-height: 350px;
   -webkit-background-size: cover;
   -moz-background-size: cover;

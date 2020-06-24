@@ -60,3 +60,4 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
+#skaffold dev --no-prune=false --cache-artifacts=false

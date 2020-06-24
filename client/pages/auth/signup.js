@@ -74,6 +74,7 @@ export default () => {
             className={styles.input}
             onChange={(e) => setEmail(e.currentTarget.value)}
             placeholder=""
+            autoComplete="off"
           />
           <label htmlFor="email" className={styles.label}>
             Email
@@ -103,46 +104,15 @@ export default () => {
         <p>
           Password strength:<span ref={passwordRef}> {pwStrength}</span>
         </p>
-        {/* <ul>
-          <li>must be at least 8 characters</li>
-          <li>must contain a capital letter</li>
-          <li>must contain a number</li>
-          <li>must contain a special character</li>
-        </ul> */}
+        <ul>
+          <li>should be at least 8 characters</li>
+          <li>should contain a capital letter</li>
+          <li>should contain a number</li>
+          <li>should contain a special character</li>
+        </ul>
         {errors}
         <button className="btn btn-primary">Sign up</button>
       </form>
     </div>
-    // <form onSubmit={onSubmit}>
-    //   <h1>Sign up</h1>
-    //   <div className="form-group">
-    //     <label>Email</label>
-    //     <input
-    //       value={email}
-    //       type="email"
-    //       placeholder="Enter email address"
-    //       onChange={(e) => {
-    //         setEmail(e.currentTarget.value);
-    //       }}
-    //       className="form-control"
-    //     />
-    //   </div>
-    //   <div className="form-group">
-    //     <label>Password</label>
-    //     <input
-    //       type="password"
-    //       value={password}
-    //       placeholder="Enter Password"
-    //       onChange={(e) => {
-    //         setPassword(e.currentTarget.value);
-    //       }}
-    //       className="form-control"
-    //     />
-    //   </div>
-
-    //   {errors}
-
-    //   <button className="btn btn-primary">Sign up</button>
-    // </form>
   );
 };

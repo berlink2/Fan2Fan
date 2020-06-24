@@ -5,12 +5,7 @@ export default () => {
   return (
     <form>
       <div class="field">
-        <input
-          type="email"
-          name="email"
-          className="input"
-          placeholder=""
-        ></input>
+        <input type="email" name="email" className="input" placeholder="" />
         <label for="email" class="label">
           Email
         </label>
